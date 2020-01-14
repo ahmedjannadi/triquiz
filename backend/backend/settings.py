@@ -25,7 +25,7 @@ SECRET_KEY = 'cy5)3+gbdg7tm9zn564^z()5as8g5=h%!lr7(gq$25^qr!xk(s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ahmedjannadi.tk']
+ALLOWED_HOSTS = []
 
 
 # Application definition
