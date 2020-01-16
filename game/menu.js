@@ -8,16 +8,12 @@ Game.Menu.prototype = {
 		this.bg.scale.setTo(2)
 		
 
-		this.playButton = game.add.text(Game.WIDTH /2 , Game.HEIGHT / 2, "PLAY")
-		this.playButton.inputEnabled = true;
-		this.playButton.addColor("#fff",0)
-		this.playButton.events.onInputDown.add(this.playButtonClick,this)
-
-		this.optionsButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT /2 + 20, "OPTIONS", "#fff",this.optionsButtonClick,this)
+		this.playButton = this.addTextButton(Game.WIDTH /2 , Game.HEIGHT / 2 - 100, "PLAY", "#fff", this.playButtonClick,this)
+		this.optionsButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 100, "OPTIONS", "#fff",this.optionsButtonClick,this)
 
 	},
 	update: function() {
-		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED
+		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED / 2
 	},
 
 	// Returns a Text Button
@@ -28,10 +24,11 @@ Game.Menu.prototype = {
 	// onClick callback function when clicked
 	// game a reference to the game object should be "this" in the game state
 	addTextButton: function(x, y, text, color="#fff", onClick, game) {
-		var button = game.add.text(x, y, text)
+		var button = game.add.text(x, y, text, Game.MENU_STYLE)
 		button.inputEnabled = true;
 		button.addColor(color,0)
 		button.events.onInputDown.add(onClick, game)
+		button.anchor.setTo(0.5)
 		return button
 	},
 
