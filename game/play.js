@@ -71,6 +71,16 @@ Game.Play.prototype = {
 		this.answerText1.anchor.setTo(0,0.5)
 		this.answerText2.anchor.setTo(0,0.5)
 		this.answerText3.anchor.setTo(0,0.5)
+
+		// enabling touch input
+		this.answerText1.inputEnabled = true
+		this.answerText2.inputEnabled = true
+		this.answerText3.inputEnabled = true
+
+		// adding touch event
+		this.answerText1.events.onInputDown.add(this.answerFirstAnswer,this)
+		this.answerText2.events.onInputDown.add(this.answerSecondAnswer,this)
+		this.answerText3.events.onInputDown.add(this.answerThirdAnswer,this)
 	},
 
 	answerFirstAnswer: function() {
