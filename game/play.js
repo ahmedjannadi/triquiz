@@ -17,9 +17,6 @@ Game.Play.prototype = {
 		let hintTextTween = game.add.tween(this.hintText).to({alpha: 0},1500,"Linear",true,0,0);
 		hintTextTween.start()
 
-		this.correctAnswer = 0
-		
-
 		// Input handeling
 		this.initInput()
 
@@ -81,6 +78,8 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.spawnQuestion()
+		}else {
+			this.wrongAnswer()
 		}
 	},
 
@@ -89,6 +88,8 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.spawnQuestion()
+		}else {
+			this.wrongAnswer()
 		}
 	},
 
@@ -97,6 +98,8 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.spawnQuestion()
+		}else {
+			this.wrongAnswer()
 		}
 	},
 
@@ -108,4 +111,8 @@ Game.Play.prototype = {
 		this.key2.onDown.add(this.answerSecondAnswer, this)
 		this.key3.onDown.add(this.answerThirdAnswer, this)
 	},
+	
+	wrongAnswer: function() {
+		game.state.start("Lose")
+	}
 }
