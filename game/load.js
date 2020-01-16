@@ -3,8 +3,8 @@ Game.Load = function(game){}
 Game.Load.prototype = {
 	preload: function(){
 		game.load.image("bg","assets/img/bg.png") // Background image
-		//game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		game.scale.setScreenSize()
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 	},
 	update: function(){
 
