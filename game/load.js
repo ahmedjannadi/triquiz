@@ -23,6 +23,7 @@ Game.Load.prototype = {
 		this.text.anchor.setTo(0.5,0.5);
 
 		game.load.image("bg","assets/img/bg.png") // Background image
+		game.load.image("line","assets/img/line.png") // Line
 		game.load.audio("bgm","assets/bgm/bgm.mp3") // Background music
 		game.load.audio("hit","assets/snd/hit.wav") // Hit sound
 		game.load.audio("death","assets/snd/death.wav") // Hit sound

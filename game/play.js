@@ -1,6 +1,10 @@
 Game.Play = function(game){}
 Game.Play.prototype = {
 	create: function() {
+		
+
+		this.score = 0
+
 		// background stuff
 		this.bg = game.add.tileSprite(Game.WIDTH / 2,Game.HEIGHT / 2,Game.WIDTH,Game.HEIGHT,"bg") // Background repeating sprite
 		this.bg.anchor.setTo(0.5)
@@ -17,11 +21,16 @@ Game.Play.prototype = {
 		let hintTextTween = game.add.tween(this.hintText).to({alpha: 0},1500,"Linear",true,0,0);
 		hintTextTween.start()
 
+		this.line = game.add.sprite(Game.WIDTH /2 , Game.LINE_Y, "line")
+		this.line.anchor.setTo(0.5)
+
 		// Input handeling
 		this.initInput()
 
 		this.hitSound = game.add.audio("hit")
 		this.deathSound = game.add.audio("death")
+		
+		this.scoreText = game.add.text(50,50,"0",Game.SCORE_STYLE)
 
 	},
 	update: function() {
@@ -29,6 +38,9 @@ Game.Play.prototype = {
 		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED
 
 		updateShakeScreen()
+		if (this.currentQuestionText.y >= Game.LINE_Y){
+			this.wrongAnswer()
+		}
 	},
 
 	spawnQuestion: function() {
@@ -130,8 +142,17 @@ Game.Play.prototype = {
 	correctAnswerFunc: function() {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
-			this.spawnQuestion()
 			this.hitSound.play()
 			shakeScreen(10)
+			this.updateScore()
+
+			this.spawnQuestion()
+	},
+
+	updateScore: function() {
+		console.log(this.currentQuestionText.y)
+		console.log(Game.LINE_Y)
+		this.score += Math.floor(Math.abs(this.currentQuestionText.y - Game.LINE_Y))
+		this.scoreText.text = this.score
 	},
 }

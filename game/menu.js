@@ -11,7 +11,7 @@ Game.Menu.prototype = {
 		
 
 		this.playButton = this.addTextButton(Game.WIDTH /2 , Game.HEIGHT / 2 - 100, "PLAY", "#fff", this.playButtonClick,this)
-		this.optionsButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 100, "OPTIONS", "#fff",this.optionsButtonClick,this)
+		this.optionsButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 100, "FULLSCREEN", "#fff",this.optionsButtonClick,this)
 	},
 	update: function() {
 		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED / 2
