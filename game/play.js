@@ -20,6 +20,9 @@ Game.Play.prototype = {
 		// Input handeling
 		this.initInput()
 
+		this.hitSound = game.add.audio("hit")
+		this.deathSound = game.add.audio("death")
+
 	},
 	update: function() {
 		this.currentQuestionText.y += Game.SPEED
@@ -88,7 +91,9 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.spawnQuestion()
+			this.hitSound.play()
 		}else {
+			this.deathSound.play()
 			this.wrongAnswer()
 		}
 	},
@@ -98,7 +103,9 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.spawnQuestion()
+			this.hitSound.play()
 		}else {
+			this.deathSound.play()
 			this.wrongAnswer()
 		}
 	},
@@ -108,7 +115,9 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.spawnQuestion()
+			this.hitSound.play()
 		}else {
+			this.deathSound.play()
 			this.wrongAnswer()
 		}
 	},
