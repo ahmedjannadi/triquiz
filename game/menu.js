@@ -44,7 +44,12 @@ Game.Menu.prototype = {
 
 	// onClick callback function for options button
 	optionsButtonClick: function() {
-		alert("OPTIONS")
+		if(game.scale.isFullScreen) {
+			game.scale.stopFullScreen()
+		}
+		else {
+			game.scale.startFullScreen()
+		}
 	},
 
 }

@@ -28,6 +28,7 @@ Game.Load.prototype = {
 		game.load.audio("death","assets/snd/death.wav") // Hit sound
 		game.scale.setScreenSize()
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+		game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
 	},
 	update: function(){
 
