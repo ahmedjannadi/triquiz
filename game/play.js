@@ -27,6 +27,8 @@ Game.Play.prototype = {
 	update: function() {
 		this.currentQuestionText.y += Game.SPEED
 		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED
+
+		updateShakeScreen()
 	},
 
 	spawnQuestion: function() {
@@ -88,36 +90,24 @@ Game.Play.prototype = {
 
 	answerFirstAnswer: function() {
 		if(this.correctAnswer == 0) {
-			this.currentQuestionText.addColor("#0f0",0)
-			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
-			this.spawnQuestion()
-			this.hitSound.play()
+			this.correctAnswerFunc()
 		}else {
-			this.deathSound.play()
 			this.wrongAnswer()
 		}
 	},
 
 	answerSecondAnswer: function() {
 		if(this.correctAnswer == 1) {
-			this.currentQuestionText.addColor("#0f0",0)
-			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
-			this.spawnQuestion()
-			this.hitSound.play()
+			this.correctAnswerFunc()
 		}else {
-			this.deathSound.play()
 			this.wrongAnswer()
 		}
 	},
 
 	answerThirdAnswer: function() {
 		if(this.correctAnswer == 2) {
-			this.currentQuestionText.addColor("#0f0",0)
-			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
-			this.spawnQuestion()
-			this.hitSound.play()
+			this.correctAnswerFunc()
 		}else {
-			this.deathSound.play()
 			this.wrongAnswer()
 		}
 	},
@@ -132,6 +122,16 @@ Game.Play.prototype = {
 	},
 	
 	wrongAnswer: function() {
+		this.deathSound.play()
+		shakeScreen(30)
 		game.state.start("Lose")
-	}
+	},
+
+	correctAnswerFunc: function() {
+			this.currentQuestionText.addColor("#0f0",0)
+			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
+			this.spawnQuestion()
+			this.hitSound.play()
+			shakeScreen(10)
+	},
 }

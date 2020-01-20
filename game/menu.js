@@ -2,6 +2,8 @@ Game.Menu = function(game){}
 Game.Menu.prototype = {
 	create: function() {
 
+		this.selected = 0
+
 		this.bg = game.add.tileSprite(Game.WIDTH / 2,Game.HEIGHT / 2,Game.WIDTH,Game.HEIGHT,"bg") // Background repeating sprite
 		this.bg.anchor.setTo(0.5)
 		this.bg.angle = 15
@@ -10,10 +12,13 @@ Game.Menu.prototype = {
 
 		this.playButton = this.addTextButton(Game.WIDTH /2 , Game.HEIGHT / 2 - 100, "PLAY", "#fff", this.playButtonClick,this)
 		this.optionsButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 100, "OPTIONS", "#fff",this.optionsButtonClick,this)
-
 	},
 	update: function() {
 		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED / 2
+		this.playButton.alpha = this.selected == 0 ? 1 : 0.5
+		this.optionsButton.alpha = this.selected == 1 ? 1 : 0.5
+		
+		updateShakeScreen()
 	},
 
 	// Returns a Text Button

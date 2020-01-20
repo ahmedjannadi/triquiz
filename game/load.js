@@ -1,3 +1,20 @@
+function updateShakeScreen() {
+	if (Game.shakeWorld > 0) {
+		var rand1 = game.rnd.integerInRange(-10,10);
+		var rand2 = game.rnd.integerInRange(-10,10);
+		game.world.setBounds(0, rand2, game.width + rand1, game.height + rand2);
+		Game.shakeWorld--;
+		if (Game.shakeWorld == 0) {
+			game.world.setBounds(0, 0, game.width,game.height); // normalize after shake?
+		}
+	}
+}
+
+function shakeScreen(value) {
+	Game.shakeWorld = value
+}
+
+
 Game.Load = function(game){}
 
 Game.Load.prototype = {

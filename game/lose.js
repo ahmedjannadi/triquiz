@@ -15,6 +15,7 @@ Game.Lose.prototype = {
 	},
 	update: function() {
 		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED / 2
+		updateShakeScreen()
 	},
 
 	// Returns a Text Button
