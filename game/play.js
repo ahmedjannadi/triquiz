@@ -158,7 +158,14 @@ Game.Play.prototype = {
 	wrongAnswer: function() {
 		this.deathSound.play()
 		shakeScreen(30)
+
 		Game.score = this.score
+
+		if(Game.score > Game.bestScore) {
+			Game.bestScore = Game.score
+			localStorage.setItem("bestscore",Game.bestScore)
+		}
+
 		game.state.start("Lose")
 	},
 
@@ -166,15 +173,15 @@ Game.Play.prototype = {
 			this.currentQuestionText.addColor("#0f0",0)
 			let questionKillTween = game.add.tween(this.currentQuestionText).to({x:3000},2000).start()
 			this.hitSound.play()
+
 			shakeScreen(10)
+
 			this.updateScore()
 
 			this.spawnQuestion()
 	},
 
 	updateScore: function() {
-		console.log(this.currentQuestionText.y)
-		console.log(Game.LINE_Y)
 		this.score += Math.floor(Math.abs(this.currentQuestionText.y - Game.LINE_Y))
 		this.scoreText.text = this.score
 	},

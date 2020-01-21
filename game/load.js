@@ -30,7 +30,7 @@ Game.Load = function(game){}
 
 Game.Load.prototype = {
 	preload: function(){
-		this.text = game.add.text(Game.WIDTH/2,Game.HEIGHT/2,"Loading...");
+		this.text = game.add.text(Game.WIDTH/2,Game.HEIGHT/2,"Loading...",Game.SCORE_STYLE);
 		this.text.anchor.setTo(0.5,0.5);
 
 		game.load.image("bg","assets/img/bg.png") // Background image
@@ -41,6 +41,10 @@ Game.Load.prototype = {
 		game.scale.setScreenSize()
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
+
+		if(localStorage.getItem("bestscore") !== null) {
+			Game.bestScore = localStorage.getItem("bestscore")
+		}
 	},
 	update: function(){
 
