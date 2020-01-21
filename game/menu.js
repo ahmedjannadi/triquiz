@@ -3,15 +3,18 @@ Game.Menu.prototype = {
 	create: function() {
 
 		this.selected = 0
-		this.selectionCount = 2 // number of menu items
+		this.selectionCount = 3 // number of menu items
 
 		this.bg = game.add.tileSprite(Game.WIDTH / 2,Game.HEIGHT / 2,Game.WIDTH,Game.HEIGHT,"bg") // Background repeating sprite
 		this.bg.anchor.setTo(0.5)
 		this.bg.angle = 15
 		this.bg.scale.setTo(2)
 		
-		this.playButton = this.addTextButton(Game.WIDTH /2 , Game.HEIGHT / 2 - 100, "PLAY", "#fff", this.playButtonClick,this)
-		this.fullscreenButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 100, "FULLSCREEN", "#fff",this.fullscreenButtonClick,this)
+		this.playButton = this.addTextButton(Game.WIDTH /2 , Game.HEIGHT / 2 - 200, "PLAY", "#fff", this.playButtonClick,this)
+		this.fullscreenButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 , "FULLSCREEN", "#fff",this.fullscreenButtonClick,this)
+		this.muteButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 200, "MUTE", "#fff",this.muteButtonClick,this)
+
+		this.muteButton.text = game.sound.mute ? "UNMUTE" : "MUTE"
 
 		this.initKeyboardInput()
 	},
@@ -21,6 +24,7 @@ Game.Menu.prototype = {
 
 		this.playButton.alpha = this.selected == 0 ? 1 : 0.5
 		this.fullscreenButton.alpha = this.selected == 1 ? 1 : 0.5
+		this.muteButton.alpha = this.selected == 2 ? 1 : 0.5
 
 		if(this.selected < 0) {
 			this.selected += this.selectionCount
@@ -66,6 +70,12 @@ Game.Menu.prototype = {
 		}
 	},
 
+	// onClick callback function for mute button
+	muteButtonClick: function() {
+		game.sound.mute = !game.sound.mute
+		this.muteButton.text = game.sound.mute ? "UNMUTE" : "MUTE"
+	},
+
 	initKeyboardInput: function() {
 		this.keyUp = game.input.keyboard.addKey(Phaser.Keyboard.UP)
 		this.keyUp.onDown.add(this.onKeyUpDown,this)
@@ -95,6 +105,10 @@ Game.Menu.prototype = {
 
 			if(this.selected == 1) {
 				this.fullscreenButtonClick()
+			}
+
+			if(this.selected == 2) {
+				this.muteButtonClick()
 			}
 	},
 
