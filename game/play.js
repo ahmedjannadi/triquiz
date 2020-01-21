@@ -1,8 +1,14 @@
 Game.Play = function(game){}
 Game.Play.prototype = {
 	create: function() {
-		
+		// the number of questions
+		this.countQuestions = Game.questions.length
+		// array of the index of the answered questions
+		this.answeredQuestions = []
 
+		Game.questions = shuffle(Game.questions)
+		
+		// initialise the score
 		this.score = 0
 
 		// background stuff
@@ -25,7 +31,7 @@ Game.Play.prototype = {
 		this.line.anchor.setTo(0.5)
 
 		// Input handeling
-		this.initInput()
+		this.initKeyboardInput()
 
 		this.hitSound = game.add.audio("hit")
 		this.deathSound = game.add.audio("death")
@@ -34,13 +40,20 @@ Game.Play.prototype = {
 
 	},
 	update: function() {
+		// moves the question
 		this.currentQuestionText.y += Game.SPEED
+
+		// scrols the background
 		this.bg.tilePosition.x -= Game.BACKGROUND_SPEED
 
-		updateShakeScreen()
+		// checks if the question collides with the line
 		if (this.currentQuestionText.y >= Game.LINE_Y){
 			this.wrongAnswer()
 		}
+
+		// always add at the end of update function of game state for
+		// screenshake to work
+		updateShakeScreen()
 	},
 
 	spawnQuestion: function() {
@@ -100,6 +113,15 @@ Game.Play.prototype = {
 		this.answerText3.events.onInputDown.add(this.answerThirdAnswer,this)
 	},
 
+	answer: function(index) {
+		if(this.correctAnswer == index) {
+			this.correctAnswerFunc()
+		}else {
+			this.wrongAnswer()
+		}
+
+	},
+
 	answerFirstAnswer: function() {
 		if(this.correctAnswer == 0) {
 			this.correctAnswerFunc()
@@ -124,7 +146,7 @@ Game.Play.prototype = {
 		}
 	},
 
-	initInput: function() {
+	initKeyboardInput: function() {
 		this.key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE)
 		this.key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO)
 		this.key3 = game.input.keyboard.addKey(Phaser.Keyboard.THREE)
@@ -154,5 +176,12 @@ Game.Play.prototype = {
 		console.log(Game.LINE_Y)
 		this.score += Math.floor(Math.abs(this.currentQuestionText.y - Game.LINE_Y))
 		this.scoreText.text = this.score
+	},
+
+	setRandomQuestion: function() {
+		randomQuestion = Math.floor(Math.random() * this.countQuestions)
+		while(!this.answeredQuestions.includes(randomQuestion)) {
+			randomQuestion = Math.floor(Math.random() * this.countQuestions)
+		}
 	},
 }
