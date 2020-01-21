@@ -22,9 +22,9 @@ Game.Play.prototype = {
 		this.questionCounter=0
 		this.spawnQuestion()
 
-		this.hintText = game.add.text(Game.WIDTH / 2, Game.HEIGHT / 2, "Press 1 or 2 or 3 to answers", Game.ANSWERS_STYLE)
+		this.hintText = game.add.text(Game.WIDTH / 2, Game.HEIGHT / 2, "Press 1 or 2 or 3 to answer", Game.ANSWERS_STYLE)
 		this.hintText.anchor.setTo(0.5)
-		let hintTextTween = game.add.tween(this.hintText).to({alpha: 0},1500,"Linear",true,0,0);
+		let hintTextTween = game.add.tween(this.hintText).to({alpha: 0},4000);
 		hintTextTween.start()
 
 		this.line = game.add.sprite(Game.WIDTH /2 , Game.LINE_Y, "line")
@@ -177,12 +177,5 @@ Game.Play.prototype = {
 		console.log(Game.LINE_Y)
 		this.score += Math.floor(Math.abs(this.currentQuestionText.y - Game.LINE_Y))
 		this.scoreText.text = this.score
-	},
-
-	setRandomQuestion: function() {
-		randomQuestion = Math.floor(Math.random() * this.countQuestions)
-		while(!this.answeredQuestions.includes(randomQuestion)) {
-			randomQuestion = Math.floor(Math.random() * this.countQuestions)
-		}
 	},
 }
