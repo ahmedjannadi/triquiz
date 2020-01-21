@@ -158,6 +158,7 @@ Game.Play.prototype = {
 	wrongAnswer: function() {
 		this.deathSound.play()
 		shakeScreen(30)
+		Game.score = this.score
 		game.state.start("Lose")
 	},
 

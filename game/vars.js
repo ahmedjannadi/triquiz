@@ -1,5 +1,4 @@
 Game = {}
-Game.SCORE = 0
 
 Game.WIDTH = 720
 Game.HEIGHT = 1280

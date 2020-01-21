@@ -16,7 +16,7 @@ function shakeScreen(value) {
 
 // fisher yates shuffle
 function shuffle(array) {
-	for(let i = array.length; i > 0; i--) {
+	for(let i = array.length - 1; i > 0; i--) {
 		let j = Math.floor(Math.random() * i)
 		let tmp = array[i]
 		array[i] = array[j]

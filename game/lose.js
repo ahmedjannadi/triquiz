@@ -13,7 +13,7 @@ Game.Lose.prototype = {
 
 		this.menuButton = this.addTextButton(Game.WIDTH / 2, Game.HEIGHT / 2 + 100, "MENU", "#fff",this.menuButtonClick,this)
 
-		this.loseMessage = game.add.text(Game.WIDTH / 2, Game.HEIGHT / 2 - 400, "You Lose",{font: "bold 50px Verdana",fill:"#f00"})
+		this.loseMessage = game.add.text(Game.WIDTH / 2, Game.HEIGHT / 2 - 400, ""+Game.score,{font: "bold 50px Verdana",fill:"#fff"})
 		this.loseMessage.anchor.setTo(0.5)
 
 		this.initKeyboardInput()
