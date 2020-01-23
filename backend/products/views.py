@@ -6,6 +6,7 @@ from django.http import JsonResponse
  
 def question(req):
     data = serializers.serialize('json', Question.objects.all())
+    data = data.replace("\\\\","\\")
     return JsonResponse(data,safe=False)
 
 
