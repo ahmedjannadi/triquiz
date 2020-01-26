@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8080:8000
+    volumes:
+      - ./backend/:/code/
+
+  game:
+    image: httpd:2.4
+    ports:
+     - 8081:80
+    volumes:
+      - ./game/:/usr/local/apache2/htdocs
